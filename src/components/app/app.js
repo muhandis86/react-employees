@@ -13,17 +13,36 @@ class App extends Component {
         super(props);
         this.state = {
             data: [
-                { name: 'Alex', salary: 800, increase: true, id: 1 },
-                { name: 'Jonh', salary: 1000, increase: true, id: 2 },
+                { name: 'Alex', salary: 800, increase: false, id: 1 },
+                { name: 'Jonh', salary: 1000, increase: false, id: 2 },
                 { name: 'Carl', salary: 5000, increase: false, id: 3 }
             ]
         }
+        this.maxId = 4;
     }
 
     deleteItem = (id) => {
         this.setState(({ data }) => {
             return {
                 data: data.filter(item => item.id !== id)
+            }
+        })
+    }
+
+    addItem = (name, salary) => {
+
+        const newItem = {
+            name: name,
+            salary: +salary,
+            increase: false,
+            id: this.maxId++
+        }
+
+        console.log(newItem);
+
+        this.setState(({ data }) => {
+            return {
+                data: [...data, newItem]
             }
         })
     }
@@ -41,8 +60,8 @@ class App extends Component {
                 <EmployersList
                     data={this.state.data}
                     onDelete={this.deleteItem} />
-                <EmployersAddForm />
-
+                <EmployersAddForm
+                    onAdd={this.addItem} />
             </div>
         );
     }

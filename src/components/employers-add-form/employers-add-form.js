@@ -18,7 +18,6 @@ class EmployersAddForm extends Component {
             [e.target.name]: e.target.value,
             nameClasses: e.target.name === 'name' ? this.inputClasses : this.state.nameClasses,
             salaryClasses: e.target.name === 'salary' ? this.inputClasses : this.state.salaryClasses
-
         })
     }
 

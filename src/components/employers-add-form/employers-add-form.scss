@@ -9,13 +9,13 @@
 
 .add-form {
     margin-top: 20px;
-}
 
-.add-form input {
-    width: 350px;
-    margin-right: 20px;
-}
+    input {
+        width: 350px;
+        margin-right: 20px;
 
-.add-form input.is-invalid::placeholder {
-    color: red;
+        &.is-invalid::placeholder {
+            color: red;
+        }
+    }
 }

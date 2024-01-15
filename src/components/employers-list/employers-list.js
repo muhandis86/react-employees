@@ -1,6 +1,6 @@
 import EmployersListItem from '../employers-list-item/employers-list-item';
 
-import './employers-list.css'
+import './employers-list.scss'
 
 const EmployersList = ({ data, onDelete, onToggleProp, onChangeSalary }) => {
 

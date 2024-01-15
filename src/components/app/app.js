@@ -69,12 +69,13 @@ class App extends Component {
 
     filterEmployees = (items, filter) => {
         switch (filter) {
-            case 'all':
-                return items;
+
             case 'rise':
                 return items.filter(item => item.rise);
             case 'salaryMore1000':
                 return items.filter(item => item.salary > 1000);
+            default:
+                return items;
         }
     }
 
@@ -99,7 +100,7 @@ class App extends Component {
 
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-                    <AppFilter onSelectFilter={this.OnSelectFilter} />
+                    <AppFilter filter={filter} onSelectFilter={this.OnSelectFilter} />
                 </div>
 
                 <EmployersList

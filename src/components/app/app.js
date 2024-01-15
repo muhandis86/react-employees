@@ -13,11 +13,12 @@ class App extends Component {
         super(props);
         this.state = {
             data: [
-                { name: 'Alex', salary: 800, increase: false, rise: true, id: 1 },
+                { name: 'Alex', salary: 800, increase: true, rise: true, id: 1 },
                 { name: 'Jonh', salary: 1000, increase: false, rise: false, id: 2 },
                 { name: 'Carl', salary: 5000, increase: false, rise: false, id: 3 }
             ],
-            term: ''
+            term: '',
+            filter: 'all'
         }
         this.maxId = 4;
     }
@@ -61,21 +62,36 @@ class App extends Component {
         if (term.length === 0) {
             return items;
         }
-
         return items.filter(item => {
             return item.name.indexOf(term) > -1;
         })
     }
 
+    filterEmployees = (items, filter) => {
+        switch (filter) {
+            case 'all':
+                return items;
+            case 'rise':
+                return items.filter(item => item.rise);
+            case 'salaryMore1000':
+                return items.filter(item => item.salary > 1000);
+        }
+    }
+
     onUpdateSearch = (term) => {
-        this.setState({ term }); // {term} === {term: term}
+        this.setState({ term });
+    }
+
+    OnSelectFilter = (filter) => {
+        this.setState({ filter })
     }
 
     render() {
-        const { data, term } = this.state;
+        const { data, term, filter } = this.state;
         const employees = data.length;
         const increased = data.filter(item => item.increase).length;
-        const visibleData = this.searchEmployees(data, term);
+        const filterData = this.filterEmployees(data, filter);
+        const visibleData = this.searchEmployees(filterData, term);
 
         return (
             <div className="app">
@@ -83,7 +99,7 @@ class App extends Component {
 
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-                    <AppFilter />
+                    <AppFilter onSelectFilter={this.OnSelectFilter} />
                 </div>
 
                 <EmployersList

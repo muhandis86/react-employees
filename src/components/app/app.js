@@ -47,15 +47,17 @@ class App extends Component {
         })
     }
 
-    onToggleProp = (id, prop) => {
-        this.setState(({ data }) => ({
-            data: data.map(item => {
-                if (item.id === id) {
-                    return { ...item, [prop]: !item[prop] }
-                }
-                return item;
-            })
-        }))
+    onToggleProp = (id, prop, event) => {
+        if (event.type === 'click' || event.key === 'Enter' || event.key === ' ') {
+            this.setState(({ data }) => ({
+                data: data.map(item => {
+                    if (item.id === id) {
+                        return { ...item, [prop]: !item[prop] }
+                    }
+                    return item;
+                })
+            }))
+        }
     }
 
     searchEmployees = (items, term) => {
@@ -118,6 +120,7 @@ class App extends Component {
                     onDelete={this.deleteItem}
                     onChangeSalary={this.onChangeSalary}
                     onToggleProp={this.onToggleProp} />
+
                 <EmployersAddForm
                     onAdd={this.addItem} />
             </div>

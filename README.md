@@ -10,3 +10,5 @@ My first "CRUD" application on React.js
 3. Open the folder in code editor.
 4. Enter the command in the terminal:
    `npm i`
+5. Run app by command in the terminal:
+   `npm start`
